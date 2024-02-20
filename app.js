@@ -21,6 +21,7 @@ const addressRoutes = require("./routes/addressRoute");
 const cartRoutes = require("./routes/cartRoute");
 const categoryRoutes = require("./routes/cateogryRoute");
 // const cors = require("cors");
+// for know nothing
 
 mongoose
   .connect(process.env.MONGO_URI)
