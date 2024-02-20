@@ -22,7 +22,7 @@ const cartRoutes = require("./routes/cartRoute");
 const categoryRoutes = require("./routes/cateogryRoute");
 // const cors = require("cors");
 // for know nothing
-// mohanad
+// mohanad hassan
 
 mongoose
   .connect(process.env.MONGO_URI)
