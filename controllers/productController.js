@@ -3,9 +3,9 @@ const asyncHandler = require("express-async-handler");
 
 const createProduct = asyncHandler(async (req, res) => {
   const newProduct = req.body;
-  const productCount = await Product.countDocuments();
+ 
 
-  newProduct.product_id = productCount + 1;
+ 
 
   const createdProduct = await Product.create(newProduct);
 

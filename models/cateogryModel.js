@@ -1,30 +1,25 @@
-const mongoose=require('mongoose')
-const bcrypt=require('bcryptjs')
+const mongoose = require("mongoose");
+const bcrypt = require("bcryptjs");
 
-const categorySchema=mongoose.Schema({
-    category_id:{
-        type:Number,
-        required:true,
-        unique:true,
-    
+const categorySchema = mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: true,
+      minLength: [3, "user name at least 8 characters"],
+      unique: true,
     },
-    name:{
-        type:String,
-        required:true,
-        minLength:[3,"user name at least 8 characters",],
-        unique:true
-    },
-   
-    description:{
-        type:String,
-        minLength:10,
-        maxLength:[50,"maximum length 15 characters"],
 
+    description: {
+      type: String,
+      minLength: 10,
+      //   maxLength: [50, "maximum length 15 characters"],
     },
-   
-},{collection:"Category"},{timestamps:true}
+  },
+  { collection: "Category" },
+  { timestamps: true }
 );
 
-const categoryModel= mongoose.model('Category',categorySchema)
+const categoryModel = mongoose.model("Category", categorySchema);
 
-module.exports=categoryModel
+module.exports = categoryModel;

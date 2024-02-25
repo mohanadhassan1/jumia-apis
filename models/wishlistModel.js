@@ -3,13 +3,9 @@ const mongoose = require("mongoose");
 
 const wishlistSchema = new mongoose.Schema(
   {
-    wishlist_id: {
-      type: Number,
-      required: true,
-      unique: true,
-    },
+   
     customer_id: {
-      type: Number, // Assuming user_id is a string, adjust accordingly
+      type: mongoose.Schema.ObjectId, // Assuming user_id is a string, adjust accordingly
       required: true,
     },
     products: [

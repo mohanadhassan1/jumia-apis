@@ -2,14 +2,13 @@ const mongoose = require("mongoose");
 
 const ratingSchema = new mongoose.Schema(
   {
-    rating_id: { type: Number, unique: true, required: true },
     customer_id: {
       type: mongoose.Schema.Types.Number,
       ref: "Customer",
       required: true,
     },
     rated_entity_id: {
-      type: mongoose.Schema.Types.Number,
+      type: mongoose.Schema.Types.ObjectId,
       refPath: "entityModel",
     }, // Assuming Products is the name of your collection
     rating: { type: Number, required: true },
