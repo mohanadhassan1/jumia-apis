@@ -3,9 +3,6 @@ const asyncHandler = require("express-async-handler");
 
 const createProduct = asyncHandler(async (req, res) => {
   const newProduct = req.body;
- 
-
- 
 
   const createdProduct = await Product.create(newProduct);
 
@@ -19,7 +16,7 @@ const getAllProducts = asyncHandler(async (req, res) => {
 
 const getProductById = asyncHandler(async (req, res) => {
   const id = req.params.id;
-  const foundProduct = await Product.findOne({ product_id: id });
+  const foundProduct = await Product.findById(id);
 
   if (!foundProduct) {
     return res.status(404).json({ error: "Product not found" });
