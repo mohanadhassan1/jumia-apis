@@ -4,11 +4,6 @@ const bycrpt = require("bcryptjs");
 
 const vendorSchema = new mongoose.Schema(
   {
-    vendor_id: {
-      type: Number,
-      required: true,
-      unique: true,
-    },
     name: {
       type: String,
       required: true,

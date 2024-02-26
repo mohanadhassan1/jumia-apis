@@ -2,11 +2,6 @@ const mongoose = require("mongoose");
 const joi = require("joi");
 const productSchema = new mongoose.Schema(
   {
-    product_id: {
-      type: Number,
-      required: true,
-      unique: true,
-    },
     name: {
       type: String,
       required: true,
@@ -23,13 +18,13 @@ const productSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
-    category_id: {
-      type: mongoose.Schema.Types.Number,
-      ref: "Category",
+    subcategory_id: {
+      type: mongoose.Schema.ObjectId,
+      ref: "Subcategory",
       required: true,
     },
     vendor_id: {
-      type: mongoose.Schema.Types.Number,
+      type: mongoose.Schema.Types.ObjectId,
       ref: "Vendor",
       required: true,
     },

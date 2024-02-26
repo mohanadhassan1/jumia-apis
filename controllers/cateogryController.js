@@ -4,18 +4,20 @@ const asyncHandler = require("express-async-handler");
 
 const addCategory = asyncHandler(async (req, res) => {
   try {
-    const { category_id, name, description } = req.body;
+    const { name, description } = req.body;
 
-    if (!name || !category_id) {
+    if (!name || !description) {
       return res.status(400).json({ error: "Invalid category data" });
     }
-    const existingCategory = await CategoryModel.findOne({ category_id });
+
+    const existingCategory = await CategoryModel.findOne({ name });
     if (existingCategory) {
       return res
         .status(409)
-        .json({ error: "Category with this id already exists" });
+        .json({ error: "Category with this name already exists" });
     }
-    await CategoryModel.create({ category_id, name, description });
+
+    await CategoryModel.create({ name, description });
 
     return res.status(201).json({ message: "Category added successfully" });
   } catch (error) {
