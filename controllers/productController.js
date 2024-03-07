@@ -10,7 +10,10 @@ const createProduct = asyncHandler(async (req, res) => {
 });
 
 const getAllProducts = asyncHandler(async (req, res) => {
-  const products = await Product.find();
+  const products = await Product.find().populate({
+    path: "subcategory_id",
+    select: "-_id",
+  });
   res.json(products);
 });
 
@@ -29,17 +32,13 @@ const updateProductById = asyncHandler(async (req, res) => {
   const id = req.params.id;
   const updates = req.body;
 
-  const product = await Product.findOne({ product_id: id });
+  const product = await Product.findById(id);
 
   if (!product) {
     return res.status(404).json({ error: "Product not found" });
   }
 
-  const updatedProduct = await Product.findOneAndUpdate(
-    { product_id: id },
-    updates,
-    { new: true }
-  );
+  const updatedProduct = await Product.findOneAndUpdate(updates, { new: true });
 
   res.json(updatedProduct);
 });
@@ -47,9 +46,7 @@ const updateProductById = asyncHandler(async (req, res) => {
 const deleteProductById = asyncHandler(async (req, res) => {
   const id = req.params.id;
 
-  const deletedProduct = await Product.findOneAndDelete({
-    product_id: id,
-  });
+  const deletedProduct = await Product.findByIdAndDelete(id);
 
   if (!deletedProduct) {
     return res.status(404).json({ error: "Product not found" });
