@@ -6,17 +6,50 @@ const asyncHandler = require("express-async-handler");
 // ######## Add to cart
 
 // Create a new item in the cart
+// const addToCart = asyncHandler(async (req, res) => {
+//   try {
+//     const { _id, customer_id, product_id, quantity } = req.body;
+//     const stringCustomerId = String(customer_id);
+//     const stringProductId = String(product_id);
+
+//     const existingCart = await CartModel.findOne({ _id });
+
+//     if (existingCart) {
+//       // If the cart already exists, update the existing cart
+//       existingCart.items.push({ product_id, quantity });
+//       await existingCart.save();
+//       return res.status(200).json({
+//         message: "Product added to cart successfully",
+//         cart: existingCart,
+//       });
+//     } else {
+//       // If the cart doesn't exist, create a new cart
+//       const newCart = await CartModel.create({
+//         cart_id,
+//         customer_id,
+//         items: [{ product_id, quantity }],
+//       });
+//       return res.status(201).json({
+//         message: "Cart created and product added successfully",
+//         cart: newCart,
+//       });
+//     }
+//   } catch (error) {
+//     console.error("Error adding to cart:", error);
+//     return res.status(500).json({ error: "Internal Server Error" });
+//   }
+// });
 const addToCart = asyncHandler(async (req, res) => {
   try {
-    const { cart_id, customer_id, product_id, quantity } = req.body;
+    const { _id, customer_id, product_id, quantity } = req.body;
     const stringCustomerId = String(customer_id);
     const stringProductId = String(product_id);
 
-    const existingCart = await CartModel.findOne({ cart_id });
+    const existingCart = await CartModel.findOne({ _id });
 
     if (existingCart) {
       // If the cart already exists, update the existing cart
-      existingCart.items.push({ product_id, quantity });
+      existingCart.items.push({ _id: product_id, quantity });
       await existingCart.save();
       return res.status(200).json({
         message: "Product added to cart successfully",
@@ -25,9 +58,9 @@ const addToCart = asyncHandler(async (req, res) => {
     } else {
       // If the cart doesn't exist, create a new cart
       const newCart = await CartModel.create({
-        cart_id,
+        _id, // Assuming _id is the cart_id
         customer_id,
-        items: [{ product_id, quantity }],
+        items: [{ _id: product_id, quantity }],
       });
       return res.status(201).json({
         message: "Cart created and product added successfully",
@@ -39,6 +72,7 @@ const addToCart = asyncHandler(async (req, res) => {
     return res.status(500).json({ error: "Internal Server Error" });
   }
 });
+
 
 const getCartItems = asyncHandler(async (req, res) => {
   try {
