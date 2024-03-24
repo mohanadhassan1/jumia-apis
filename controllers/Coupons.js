@@ -11,7 +11,7 @@ const getCoupons = asyncHandler(async (req, res, next) => {
 });
 
 const getByCouponID = asyncHandler(async (req, res, next) => {
-  const id = req.params.id;
+  const id = req.params.id; 
   try {
     let coupon = await CouponsModle.findOne({ coupon_id: id });
     if (coupon) {

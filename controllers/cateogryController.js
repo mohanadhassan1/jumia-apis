@@ -46,9 +46,9 @@ const getAllCategories = asyncHandler(async (req, res) => {
 
 const getCategoryById = asyncHandler(async (req, res) => {
   try {
-    const { category_id } = req.params;
+    const id = req.params.id;
 
-    const category = await CategoryModel.findOne({ category_id });
+    const category = await CategoryModel.findOne({ category_id:id });
 
     if (!category) {
       return res.status(404).json({ error: "Category not found" });
