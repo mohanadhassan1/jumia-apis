@@ -20,7 +20,7 @@ const vendorSchema = new mongoose.Schema(
       required: true,
     },
     phone_number: {
-      type: number,
+      type: Number,
     },
     address: {
       type: String,
