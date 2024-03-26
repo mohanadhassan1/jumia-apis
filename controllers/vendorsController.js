@@ -7,9 +7,7 @@ require("dotenv").config();
 const createVendor = asyncHandler(async (req, res) => {
   try {
     const newVendor = req.body;
-    const vendorCount = await Vendor.countDocuments();
 
-    newVendor._id = vendorCount + 1;
     const createdVendor = await Vendor.create(newVendor);
     res.status(201).json(createdVendor);
   } catch (error) {
