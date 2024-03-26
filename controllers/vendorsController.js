@@ -10,9 +10,7 @@ const createVendor = asyncHandler(async (req, res) => {
     const vendorCount = await Vendor.countDocuments();
 
     newVendor._id = vendorCount + 1;
-
     const createdVendor = await Vendor.create(newVendor);
-
     res.status(201).json(createdVendor);
   } catch (error) {
     console.error("Error creating vendor:", error);
