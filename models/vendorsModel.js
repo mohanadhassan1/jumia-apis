@@ -10,7 +10,6 @@ const vendorSchema = new mongoose.Schema(
     },
     contact_person: {
       type: String,
-      required: true,
     },
     email: {
       type: String,
@@ -21,8 +20,7 @@ const vendorSchema = new mongoose.Schema(
       required: true,
     },
     phone_number: {
-      type: String,
-      required: true,
+      type: number,
     },
     address: {
       type: String,
