@@ -9,7 +9,7 @@ const createVendor = asyncHandler(async (req, res) => {
     const newVendor = req.body;
     const vendorCount = await Vendor.countDocuments();
 
-    newVendor.vendor_id = vendorCount + 1;
+    newVendor._id = vendorCount + 1;
 
     const createdVendor = await Vendor.create(newVendor);
 
@@ -33,7 +33,7 @@ const loginVendor = asyncHandler(async (req, res) => {
     const isValid = await bycrpt.compare(password, vendor.password);
     const token = jwt.sign(
       {
-        id: vendor.vendor_id,
+        id: vendor._id,
         username: vendor.username,
         email: vendor.email,
         role: vendor.role,
@@ -69,14 +69,14 @@ const updateVendorById = asyncHandler(async (req, res) => {
   const updates = req.body;
 
   try {
-    const vendor = await Vendor.findOne({ vendor_id: id });
+    const vendor = await Vendor.findOne({ _id: id });
 
     if (!vendor) {
       return res.json({ error: "Vendor not found" });
     }
 
     const updatedVendor = await Vendor.findOneAndUpdate(
-      { vendor_id: id },
+      { _id: id },
       updates,
       { new: true }
     );
@@ -91,7 +91,7 @@ const updateVendorById = asyncHandler(async (req, res) => {
 const getVendorById = asyncHandler(async (req, res) => {
   const id = req.params.id;
   try {
-    const foundVendor = await Vendor.findOne({ vendor_id: id });
+    const foundVendor = await Vendor.findOne({ _id: id });
     if (!foundVendor) {
       return res.status(400).json("No Vendor with that ID");
     }
@@ -106,7 +106,7 @@ const deleteVendorById = asyncHandler(async (req, res) => {
 
   try {
     const deletedVendor = await Vendor.findOneAndDelete({
-      vendor_id: id,
+      _id: id,
     });
 
     if (!deletedVendor) {
